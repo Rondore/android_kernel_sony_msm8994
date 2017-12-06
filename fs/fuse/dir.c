@@ -1677,7 +1677,7 @@ int fuse_flush_mtime(struct file *file, bool nofail)
 static bool fuse_allow_set_time(struct fuse_conn *fc, struct inode *inode)
 {
 	return (fc->flags & FUSE_ALLOW_UTIME_GRP && inode->i_mode & S_IWGRP &&
-	    current_uid() != inode->i_uid && in_group_p(inode->i_gid));
+	    !uid_eq(current_uid(), inode->i_uid) && in_group_p(inode->i_gid));
 }
 
 /*
