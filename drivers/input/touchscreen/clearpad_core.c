@@ -2532,6 +2532,7 @@ static void clearpad_funcarea_initialize(struct clearpad_t *this)
 				pointer_area.y1 -= pointer_data->offset_y;
 				pointer_area.y2 -= pointer_data->offset_y;
 			}
+                        __set_bit(INPUT_PROP_DIRECT, this->input->propbit);
 			input_set_abs_params(this->input, ABS_MT_TRACKING_ID,
 					0, this->extents.n_fingers, 0, 0);
 			input_set_abs_params(this->input, ABS_MT_POSITION_X,
