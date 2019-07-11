@@ -212,3 +212,27 @@ cond_syscall(sys_kcmp);
 
 /* operate on Secure Computing state */
 cond_syscall(sys_seccomp);
+
+/* getrandom */
+cond_syscall(sys_getrandom);
+
+/* memfd_create */
+cond_syscall(sys_memfd_create);
+
+/* access BPF programs and maps */
+cond_syscall(sys_bpf);
+
+/* execveat */
+cond_syscall(sys_execveat);
+
+/* execveat */
+cond_syscall(compat_sys_execveat);
+
+/* userfaultfd */
+cond_syscall(sys_userfaultfd);
+
+/* membarrier */
+cond_syscall(sys_membarrier);
+
+/* mlock2 */
+cond_syscall(sys_mlock2);

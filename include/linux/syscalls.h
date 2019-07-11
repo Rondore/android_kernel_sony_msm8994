@@ -65,6 +65,7 @@ struct old_linux_dirent;
 struct perf_event_attr;
 struct file_handle;
 struct sigaltstack;
+union bpf_attr;
 
 #include <linux/types.h>
 #include <linux/aio_abi.h>
@@ -872,4 +873,14 @@ asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type,
 asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
 asmlinkage long sys_seccomp(unsigned int op, unsigned int flags,
 			    const char __user *uargs);
+asmlinkage long sys_getrandom(char __user *buf, size_t count,
+				      unsigned int flags);
+asmlinkage long sys_memfd_create(const char __user *uname_ptr, unsigned int flags);
+asmlinkage long sys_bpf(int cmd, union bpf_attr *attr, unsigned int size);
+asmlinkage long sys_execveat(int dfd, const char __user *filename,
+				      const char __user *const __user *argv,
+				      const char __user *const __user *envp, int flags);
+asmlinkage long sys_userfaultfd(int flags);
+asmlinkage long sys_membarrier(int cmd, int flags);
+asmlinkage long sys_mlock2(unsigned long start, size_t len, int flags);
 #endif
