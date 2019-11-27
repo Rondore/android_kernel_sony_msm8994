@@ -1616,6 +1616,8 @@ nl_process_driver_msg(struct dev_data *dd, u16 msg_id, u16 msg_len, void *msg)
 				input_set_capability(dd->input_dev[i], EV_SW,
 						     SW_TOUCH_ACTIVITY);
 #endif
+                        __set_bit(INPUT_PROP_DIRECT, dd->input_dev[i]->propbit);
+                        __set_bit(BTN_TOUCH, dd->input_dev[i]->keybit);
 			__set_bit(EV_SYN, dd->input_dev[i]->evbit);
 			__set_bit(EV_ABS, dd->input_dev[i]->evbit);
 			if (pdata->stylus_support &&
