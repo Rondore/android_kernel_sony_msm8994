@@ -19,7 +19,7 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/platform_device.h>
-#include <linux/rfkill.h>
+/* #include <linux/rfkill.h>  */
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 #include <linux/delay.h>
@@ -41,7 +41,7 @@ static struct of_device_id bt_power_match_table[] = {
 
 static struct bluetooth_power_platform_data *bt_power_pdata;
 static struct platform_device *btpdev;
-static bool previous;
+/* static bool previous; */
 
 static int bt_vreg_init(struct bt_power_vreg_data *vreg)
 {
@@ -251,7 +251,7 @@ out:
 	return rc;
 }
 
-static int bluetooth_toggle_radio(void *data, bool blocked)
+/* static int bluetooth_toggle_radio(void *data, bool blocked)
 {
 	int ret = 0;
 	int (*power_control)(int enable);
@@ -268,7 +268,7 @@ static int bluetooth_toggle_radio(void *data, bool blocked)
 
 static const struct rfkill_ops bluetooth_power_rfkill_ops = {
 	.set_block = bluetooth_toggle_radio,
-};
+}; */
 
 #ifdef CONFIG_CNSS_PCI
 static ssize_t enable_extldo(struct device *dev, struct device_attribute *attr,
@@ -297,7 +297,7 @@ static ssize_t enable_extldo(struct device *dev, struct device_attribute *attr,
 
 static DEVICE_ATTR(extldo, S_IRUGO, enable_extldo, NULL);
 
-static int bluetooth_power_rfkill_probe(struct platform_device *pdev)
+/* static int bluetooth_power_rfkill_probe(struct platform_device *pdev)
 {
 	struct rfkill *rfkill;
 	int ret;
@@ -343,7 +343,7 @@ static void bluetooth_power_rfkill_remove(struct platform_device *pdev)
 		rfkill_unregister(rfkill);
 	rfkill_destroy(rfkill);
 	platform_set_drvdata(pdev, NULL);
-}
+} */
 
 #define MAX_PROP_SIZE 32
 static int bt_dt_parse_vreg_info(struct device *dev,
@@ -482,10 +482,11 @@ static int bt_power_probe(struct platform_device *pdev)
 		goto free_pdata;
 	}
 
-	if (bluetooth_power_rfkill_probe(pdev) < 0)
+	/* if (bluetooth_power_rfkill_probe(pdev) < 0)
 		goto free_pdata;
-
+	*/
 	btpdev = pdev;
+        bluetooth_power(true);
 
 	return 0;
 
@@ -498,7 +499,7 @@ static int bt_power_remove(struct platform_device *pdev)
 {
 	dev_dbg(&pdev->dev, "%s\n", __func__);
 
-	bluetooth_power_rfkill_remove(pdev);
+	/* bluetooth_power_rfkill_remove(pdev); */
 
 	if (bt_power_pdata->bt_chip_pwd->reg)
 		regulator_put(bt_power_pdata->bt_chip_pwd->reg);
